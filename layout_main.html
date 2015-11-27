@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>디자인 아이데이션</title>
+	<link rel="stylesheet" href="css/1.11.4/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/admin_common.css" />
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/1.11.4/jquery-ui.min.js"></script>
+	<script>
+		var slidervalue;
+		$(document).ready(function () {
+			//side slider bar
+			slidervalue = 6;
+
+			$("#slider-vertical").slider({
+				orientation: "vertical",
+				range: "min",
+				min: 0,
+				max: 10,
+				value: slidervalue
+			});
+
+			$("#btnZoomin").click(function () {
+				slidervalue++;
+				$("#slider-vertical").slider("value", slidervalue);
+			});
+
+			$("#btnZoomout").click(function () {
+				slidervalue--;
+				$("#slider-vertical").slider("value", slidervalue);
+			});
+			//그림그리는 박스
+			$(".draw_box").hide();
+			$(".btn_draw").click(function () {
+				$(".draw_box").toggle();
+			});
+		});
+	</script>
+</head>
+<body>
+<div id="wrap">
+	<div class="wrap_inner">
+		<!-- admin 상단메뉴 -->
+		<div class="admin_area top_btns">
+			<div class="top_menu">
+				<ul>
+					<li><a href="#" class="btn_attendee"><span>참석자</span></a></li>
+					<li><a href="#" class="btn_storage"><span>보관함</span></a></li>
+					<!--<li><a href="#" class="btn_together"><span>함께보기</span></a></li>-->
+					<li><a href="#" class="btn_breaktime"><span>휴식시간</span></a></li>
+				</ul>
+			</div>
+			<div class="close_btns">
+				<ul>
+					<!--<li><a href="#" class="btn_session_close"><span>다음단계</span></a></li>-->
+					<li><a href="#" class="btn_workshop_close"><span>워크샵종료</span></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- //admin 상단메뉴 -->
+		<!-- container -->
+		<div id="container">
+			<!-- admin, public 공통 상단 -->
+			<header>
+				<div id="header" class="header">
+					<h1 class="main_logo"><span class="blind">DESIGN IDEATION</span></h1>
+					<!-- 각 메뉴 선택 화면의 타이틀 -->
+					<!--<h1 class="tit_menu">브레인스토밍 테마</h1>-->
+					<!-- 메인 외 현재 위치 -->
+					<!--<div class="path">
+						<ul>
+							<li class="first"><span class="blind">메뉴</span></li>
+							<li class=""><span class="blind">현재위치</span></li>
+						</ul>
+					</div>-->
+					<!-- 워크숍 진행 시간 -->
+					<div class="progress">
+						<div class="progress_time">
+							<span class="hour">00</span><span class="minute">30</span><span class="second">00</span>
+						</div><!-- 시간이 넘어가면 over클래스가 붙으면 배경이 바뀜 -->
+						<p>워크숍 진행상황</p>
+					</div>
+					<!-- //워크숍 진행 시간 -->
+				</div>
+			</header>
+			<!-- //admin, public 공통 상단 -->
+			<!-- content -->
+			<div>
+				<a href="#" class="btn btn_text">버튼</a>
+			</div>
+			<!-- //content -->
+		</div>
+		<!-- //container -->
+		<!-- 고정 사이드바 admin&public_admin.css가 붙으면 카메라와 드로잉버튼이 나타남 -->
+		<div class="aside">
+			<!-- admin 카메라 버튼 -->
+			<div class="side_area"><a href="#" class="btn_camera"><span class="blind">camera</span></a></div>
+			<!-- 줌아웃 슬라이드 -->
+			<div class="side_area zoom_slider">
+				<a id="btnZoomin" href="#" class="btn_zoomin"><span class="blind">확대버튼</span></a>
+				<div id="slider-vertical" class="slider_bar"></div>
+				<a id="btnZoomout" href="#" class="btn_zoomout"><span class="blind">축소버튼</span></a>
+			</div>
+			<!-- admin 드로잉 버튼 -->
+			<div class="side_area draw_btns">
+				<a href="#" class="btn_draw"><span class="blind">draw</span></a>
+				<div class="draw_box">
+					<div class="inner">
+						<div class="drawing_box">
+							<ul>
+								<li><button type="button" class="db_dot1"><span class="blind">drawing dot1</span></button></li>
+								<li><button type="button" class="db_dot2"><span class="blind">drawing dot2</span></button></li>
+								<li><button type="button" class="db_dot3"><span class="blind">drawing dot3</span></button></li>
+								<li><button type="button" class="db_dot4"><span class="blind">drawing dot4</span></button></li>
+								<li><button type="button" class="db_eraser"><span class="blind">drawing eraser</span></button></li>
+							</ul>
+						</div>
+						<div class="color_box">
+							<ul>
+								<li><button type="button" class="cb_white"><span class="blind">white color</span></button></li>
+								<li><button type="button" class="cb_light_gray"><span class="blind">light_gray color</span></button></li>
+								<li><button type="button" class="cb_gray"><span class="blind">gray color</span></button></li>
+								<li><button type="button" class="cb_black"><span class="blind">black color</span></button></li>
+								<li><button type="button" class="cb_red"><span class="blind">red color</span></button></li>
+								<li><button type="button" class="cb_orange"><span class="blind">orange color</span></button></li>
+								<li><button type="button" class="cb_pink"><span class="blind">pink color</span></button></li>
+								<li><button type="button" class="cb_yellow"><span class="blind">yellow color</span></button></li>
+								<li><button type="button" class="cb_yellow_green"><span class="blind">yellow green color</span></button></li>
+								<li><button type="button" class="cb_green"><span class="blind">green color</span></button></li>
+								<li><button type="button" class="cb_sky_blue"><span class="blind">sky blue color</span></button></li>
+								<li><button type="button" class="cb_blue"><span class="blind">blue color</span></button></li>
+								<li><button type="button" class="cb_blue_green"><span class="blind">blue green color</span></button></li>
+								<li><button type="button" class="cb_violet"><span class="blind">violet color</span></button></li>
+								<li><button type="button" class="cb_cobalt_blue"><span class="blind">cobalt blue color</span></button></li>
+								<li><button type="button" class="cb_purple"><span class="blind">purple color</span></button></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<a href="#" class="btn_select"><span class="blind">select</span></a>
+			</div>
+		</div>
+		<!-- //고정 사이드바 -->
+		<!-- admin 하단메뉴 -->
+		<nav>
+			<div class="admin_area nav">
+				<ul>
+					<li><span><a href="#" class="nav_plan">아이데이션 워크샵 기획</a><a href="#" class="btn_set on"></a></span></li>
+					<li><span><a href="#" class="nav_idea_">아이디어 확장</a><a href="#" class="btn_set"></a></span></li>
+					<li><span><a href="#" class="nav_idea_group">아이디어 그룹화</a><a href="#" class="btn_set"></a></span></li>
+					<li><span><a href="#" class="nav_idea_appraisal">아이디어 컨셉 평가</a><a href="#" class="btn_set"></a></span></li>
+					<li><span><a href="#" class="nav_">워크샵 결과 리포팅</a><a href="#" class="btn_set"></a></span></li>
+				</ul>
+			</div>
+		</nav>
+		<!-- //admin 하단메뉴 -->
+	</div>
+</div>
+</body>
+</html>

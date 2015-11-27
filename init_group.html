@@ -1,0 +1,494 @@
+﻿<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>디자인 아이데이션</title>
+	<link rel="stylesheet" href="css/1.11.4/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/admin_common.css" />
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/1.11.4/jquery-ui.min.js"></script>
+	<!-- custom scrollbar plugin -->
+	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script>
+		var slidervalue;
+		$(document).ready(function () {
+			$(".set_btns > li > .btn").click(function () {
+				// 1. 지금 누른 버튼의 On이었는지 확인한다.
+				var isOn = $(this).hasClass("on");
+
+				// 2. 어떤버튼을 누르던 전부 on을 없앤다.
+				$(".set_btns > li > .btn").removeClass("on");
+				$(".admin_box").removeClass("on");
+
+				// 3. Off면 On으로 만든다.
+				if (!isOn) {
+					$(this).addClass("on");
+					$(this).siblings().addClass("on");
+				}
+			});
+			//tab
+			$(".tab_btns button").click(function () {
+				$(".tab_btns button").removeClass("on");
+				$(this).addClass("on");
+			});
+			//scroller
+			$(".scroll_popcont, .person_info, .file_list dd").mCustomScrollbar({
+				theme: "inset"
+			}); //어드민 상단 팝업메뉴의 스크롤러
+
+			$(".set_cont").mCustomScrollbar({
+				theme: "inset"
+			});
+			//select menu
+			//$("#topList").selectmenu();
+
+			//side slider bar
+			slidervalue = 6;
+
+			$("#slider-vertical").slider({
+				orientation: "vertical",
+				range: "min",
+				min: 0,
+				max: 10,
+				value: slidervalue
+			});
+
+			$("#btnZoomin").click(function () {
+				slidervalue++;
+				$("#slider-vertical").slider("value", slidervalue);
+			});
+
+			$("#btnZoomout").click(function () {
+				slidervalue--;
+				$("#slider-vertical").slider("value", slidervalue);
+			});
+			//그림그리는 박스
+			$(".draw_box").hide();
+			$(".btn_draw").click(function () {
+				$(".draw_box").toggle();
+			});
+
+			//popup
+			$("#popup").dialog({
+				modal: true,
+				autoOpen: false,
+				width: "auto",
+				show: {
+
+					duration: 200
+				},
+				hide: {
+
+					duration: 200
+				}
+			});
+
+			$(".btn_add_file").click(function () {
+				$("#popup").dialog("open");
+				$(".add_box").hide();
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<div class="wrap_inner">
+			<!-- admin 하단메뉴 -->
+			<nav>
+				<div class="admin_area nav">
+					<ul>
+						<li><span><a href="#" class="nav_plan">아이데이션 워크샵 기획</a><a href="#" class="btn_set"></a></span></li>
+						<li><span><a href="#" class="nav_idea_extend">아이디어 확장</a><a href="#" class="btn_set"></a></span></li>
+						<li><span><a href="#" class="nav_idea_group">아이디어 그룹화</a><a href="#" class="btn_set on"></a></span></li>
+						<li><span><a href="#" class="nav_idea_concept">아이디어 컨셉 평가</a><a href="#" class="btn_set"></a></span></li>
+						<li><span><a href="#" class="nav_reporting">워크샵 결과 리포팅</a><a href="#" class="btn_set"></a></span></li>
+					</ul>
+				</div>
+			</nav>
+			<!-- //admin 하단메뉴 -->
+		</div>
+	</div>
+
+	<!-- admin 설정 -->
+	<div class="setup_wrap" style="display:block;">
+		<div class="inner">
+			<div class="set_head">
+				<h3 class="tit_setup">아이디어 그룹화</h3>
+				<ul class="set_btns">
+					<li>
+						<a href="#" class="btn btn_dark btn_text btn_data">자료등록</a>
+						<!-- 팝업 -->
+						<div class="admin_box add_box">
+							<div>
+								<strong class="tit_add_box">
+									워크샵 공통자료
+									<span class="txt_total">TOTAL : 21</span>
+								</strong>
+								<div class="tab_add">
+									<div class="tab_btns">
+										<ul>
+											<li><button type="button" class="btn_section btn_all">전체</button></li>
+											<li><button type="button" class="btn_section btn_extend">아이디어 확장</button></li>
+											<li><button type="button" class="btn_section btn_group on">아이디어 그룹화</button></li>
+											<li><button type="button" class="btn_section btn_concept">아이디어 컨셉 평가</button></li>
+											<li><button type="button" class="btn_section btn_reporting">워크샵 결과 리포팅</button></li>
+										</ul>
+
+									</div>
+									<div class="add_area file_box1 scroll_popcont">
+										<button type="button" class="btn_add_file"><span class="blind">파일첨부</span></button>
+										<ul class="add_file_list">
+											<li><a href="#">원격참여부서.pdf</a> <a href="#" class="btn_delete"><span class="blind">삭제</span></a></li>
+											<li><a href="#">DesignIdeation_Storyboard_20150731.pdf</a> <a href="#" class="btn_delete"><span class="blind">삭제</span></a></li>
+											<li><a href="#">아이디에이션 지원 시스템 시나리오_20150401.pdf</a> <a href="#" class="btn_delete"><span class="blind">삭제</span></a></li>
+											<li><a href="#">원격참여부서.pdf</a> <a href="#" class="btn_delete"><span class="blind">삭제</span></a></li>
+											<li><a href="#">DesignIdeation_Storyboard_20150731.pdf</a> <a href="#" class="btn_delete"><span class="blind">삭제</span></a></li>
+											<li><a href="#">아이디에이션 지원 시스템 시나리오_20150401.pdf</a> <a href="#" class="btn_delete"><span class="blind">삭제</span></a></li>
+											<li><a href="#">원격참여부서.pdf</a> <a href="#" class="btn_delete"><span class="blind">삭제</span></a></li>
+											<li><a href="#">DesignIdeation_Storyboard_20150731.pdf</a> <a href="#" class="btn_delete"><span class="blind">삭제</span></a></li>
+											<li><a href="#">아이디에이션 지원 시스템 시나리오_20150401.pdf</a> <a href="#" class="btn_delete"><span class="blind">삭제</span></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div>
+								<strong class="tit_add_box">
+									스크린샷 자료
+									<span class="txt_total">TOTAL : 21</span>
+								</strong>
+								<div class="tab_add">
+									<div class="tab_btns">
+										<ul>
+											<li><button type="button" class="btn_section btn_all on">전체</button></li>
+											<li><button type="button" class="btn_section btn_extend">아이디어 확장</button></li>
+											<li><button type="button" class="btn_section btn_group">아이디어 그룹화</button></li>
+											<li><button type="button" class="btn_section btn_concept">아이디어 컨셉 평가</button></li>
+											<li><button type="button" class="btn_section btn_reporting">워크샵 결과 리포팅</button></li>
+										</ul>
+									</div>
+									<div class="add_area file_box2">
+										<a href="#" class="btn_list btn_prev"><span></span></a>
+										<div class="add_screen_list">
+											<ul>
+												<li></li>
+												<li></li>
+												<li></li>
+												<li></li>
+												<li></li>
+												<li></li>
+											</ul>
+										</div>
+										<a href="#" class="btn_list btn_next"><span></span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- //팝업 -->
+					</li>
+					<li>
+						<a href="#" class="btn btn_dark btn_text btn_invite">참석자 초대</a>
+						<!-- 팝업 -->
+						<div class="admin_box add_box">
+							<strong class="tit_add_box">
+								워크샵 초대하기
+							</strong>
+							<div class="select_area">
+								<select id="topList" class="list_attend" name="">
+									<option value="">참여부서를 선택해주세요.</option>
+									<option value="">참여부서 1</option>
+									<option value="">참여부서 2</option>
+									<option value="">참여부서 3</option>
+									<option value="">참여부서 4</option>
+								</select>
+								<p class="txt_total">초대 : 4</p>
+							</div>
+							<div class="person_info">
+								<ul>
+									<li class="inner_box select">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo purple"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box select">
+										<!-- select가 붙으면 안의 per_photo의 배경색이 랜덤으로 적용된다. 지금은 임의로 클래스를 넣었음 -->
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo yellow"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box select">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo pink"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box select">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo green"><img src="images/sub/img_person.png" alt="" />/dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+									<li class="inner_box">
+										<dl>
+											<dt class="per_name">
+												<small>상품개발팀</small>
+												정우성
+											</dt>
+											<dd class="per_email">abcdefg@abc.co.kr</dd>
+											<dd class="per_photo"><img src="images/sub/img_person.png" alt="" /></dd>
+										</dl>
+										<a href="#" class="btn_check"><span class="blind">초대하기</span></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- //팝업 -->
+					</li>
+					<li><a href="#" class="btn btn_report btn_text">보고서 작성</a></li>
+				</ul>
+				<a href="#" class="btn_close"><span class="blind">close</span></a>
+			</div>
+			<div class="set_cont">
+				<div class="set_inner">
+					<!-- 어드민 설정 컨텐츠 -->
+					<table class="set_write">
+						<colgroup>
+							<col style="width:150px;" />
+							<col />
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><em>01.</em> 방법론 선택</th>
+								<td>
+									<ul class="list_idea_select"><!-- 방법론 선택이 되면 list_idea_select클래스에 select가 붙고 각 버튼에 on클래스가 붙음. 각 페이지에서 구현 -->
+										<li>
+											<a href="#" class="btn_select btn_ad">어피니티 다이어그램</a>
+										</li>
+										<li>
+											<span class="btn_select btn_pm">포지셔닝 맵</span>
+											<ul class="sub_btn_list">
+												<li><a href="#" class="btn_select_sub">개별 진행 후 취합</a></li>
+												<li><span class="btn_select_sub">공동 진행</span></li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<th><em>02.</em> 테마 입력</th>
+								<td>
+									<div class="enter_theme dimm">
+										<div class="theme_write_box">
+											<div class="write_box">
+												<textarea class="write_area"></textarea>
+												<div class="write_btns">
+													<ul>
+														<li><button type="button" name="" class="btn_text"><span class="blind">텍스트</span></button></li>
+														<li><button type="button" name="" class="btn_image"><span class="blind">이미지</span></button></li>
+													</ul>
+												</div>
+											</div>
+											<ul class="theme_btns">
+												<li><a href="#" class="btn_ok"><span class="blind">확인</span></a></li>
+												<li><a href="#" class="btn_delete"><span class="blind">삭제</span></a></li>
+											</ul>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th><em>03.</em> 세션 설정</th>
+								<!-- 배경 설정 있을 때 -->
+								<td>
+									<ul class="session_setup three_setup">
+										<li class="time_box">
+											<dl>
+												<dt>진행시간</dt>
+												<dd>01시간 30분</dd>
+											</dl>
+										</li>
+										<li class="file_list">
+											<dl>
+												<dt>file 09</dt>
+												<dd>
+													<ul>
+														<li>원격참여부서.pdf</li>
+														<li>DesignIdeation_Storyboard_20150731.pdf</li>
+														<li>아이디에이션 지원 시스템 시나리오_20150401.pdf</li>
+														<li>원격참여부서.pdf</li>
+														<li>DesignIdeation_Storyboard_20150731.pdf</li>
+														<li>아이디에이션 지원 시스템 시나리오_20150401.pdf</li>
+													</ul>
+												</dd>
+											</dl>
+										</li>
+										<li class="bg_select_box">
+											<dl>
+												<dt>배경 설정</dt>
+												<dd>
+													<select id="" class="bg_list" name="">
+														<option value="">배경1</option>
+														<option value="">배경2</option>
+														<option value="">배경3</option>
+													</select>
+													<p class="txt_select_bg">선택한 배경 없음</p>
+												</dd>
+											</dl>
+										</li>
+									</ul>
+								</td><!-- 배경이 선택되면 bg_select_box 클래스에 select가 붙음 -->
+							</tr>
+						</tbody>
+					</table>
+					<!-- //어드민 설정 컨텐츠 -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bg_overlay bg_setup" style="display:block;"></div>
+</body>
+</html>
